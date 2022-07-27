@@ -1,0 +1,230 @@
+@import "abstracts/variables";
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&display=swap");
+
+// ------reset-----
+html {
+  font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+// .show{
+//     visibility: hidden;
+// }
+
+body {
+  font-family: "Manrope", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: $light-grayish-blue;
+}
+
+section.main {
+  display: grid;
+  grid-template-columns: 285px minmax(300px, 445px);
+  max-width: 730px;
+  border-radius: 1rem;
+  box-shadow: 6px 6px 5px hsla(0, 0%, 0%, 0.02),
+    25px 25px 20px hsla(0, 0%, 0%, 0.03), 100px 100px 80px hsla(0, 0%, 0%, 0.05);
+
+  .img-container {
+    border-radius: 1rem 0 0 1rem;
+    overflow: hidden;
+
+    .main-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left; //note down
+      transition: all 0.5s ease;
+      // transform: scale(1.1);
+    }
+  }
+
+  &:hover .main-image {
+    transform: scale(1.1);
+  }
+}
+
+section.main-content {
+  padding: 3rem 4rem;
+  background-color: #fff;
+  border-radius: 0 1rem 1rem 0;
+
+  .text {
+    h3 {
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.2;
+      color: $very-dark-grayish-blue;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 1.4rem;
+      line-height: 1.4;
+      margin-bottom: 2rem;
+      color: $desaturated-dark-blue;
+      font-weight: lighter;
+    }
+  }
+}
+
+// Begining of article footer
+.article-footer {
+  display: flex;
+  justify-content: space-between;
+
+  //   Start of profile-content
+  .profile-content {
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      margin-right: 1rem;
+    }
+
+    // Profile-content_text
+    &_text {
+      line-height: 1.7;
+
+      .heading {
+        font-weight: 700;
+        font-size: 1.3rem;
+        color: $very-dark-grayish-blue;
+      }
+
+      .p {
+        color: $desaturated-dark-blue;
+        font-size: 1.2rem;
+      }
+    } // End of profile-content_text
+  } //   End of profile-content
+}
+// End of article footer
+
+.share {
+  position: relative;
+
+  .share-button {
+    border: none;
+    padding: 1rem;
+    border-radius: 50%;
+    // background-color: $very-dark-grayish-blue;
+  }
+
+  .share-button.active .share-button:hover {
+    background-color: $desaturated-dark-blue;
+  }
+
+  .share-option {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background-color: $very-dark-grayish-blue;
+    padding: 1rem 3rem;
+    border-radius: 1rem;
+    bottom: calc(100% + 2.8rem);
+    left: 50%;
+    transform: translateX(-50%);
+    // transform: translateY(0);
+    // transform: scale(0);
+    scale: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    // transform-origin: bottom;
+
+    &.active {
+      scale: 1;
+      visibility: visible;
+    }
+
+    &::after {
+      content: "";
+      background-color: $very-dark-grayish-blue;
+      width: 2rem;
+      height: 2rem;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    span {
+      font-size: 1.6rem;
+      font-family: lighter;
+      text-transform: uppercase;
+      color: $grayish-blue;
+      letter-spacing: 0.5rem;
+    }
+
+    a {
+      z-index: 5;
+    }
+    a > img:hover {
+      scale: 1.1;
+      transition: all 0.25ms ease;
+    }
+  }
+}
+
+// Mobile
+@media screen and (max-width: 768px) {
+
+section.main{
+    .img-container{
+        border-radius: 1rem 1rem 0 0;
+    }
+}
+
+section.main-content{
+    border-radius: 0 0 1rem 1rem;
+}
+
+    // Reset
+    section.main-content{
+        padding: 3rem;
+    }
+  .article-footer {
+    position: relative;
+  }
+
+
+  section.main {
+    grid-template-columns: 1fr;
+    max-width: 35rem;
+  }
+
+  .share {
+    position: static;
+    z-index: 10;
+
+    .share-option {
+      inset: -2.5rem -3rem;
+      border-radius: none;
+      z-index: -1; //to make it under
+
+      &::after{
+          visibility: hidden;
+      }
+
+      &.active {
+          border-radius: 0 0 1rem 1rem;
+        transform: translateY(5px);
+      }
+    }
+  }
+}
